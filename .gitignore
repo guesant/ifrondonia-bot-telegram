@@ -3,6 +3,6 @@
 
 node_modules
 
-packages/*/lib
-services/*/lib
-services/*/volumes
+*/*/lib
+*/*/volumes
+*/*/coverage
