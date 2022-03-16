@@ -9,8 +9,12 @@
     "test": "vitest --config ./vitest.config.ts run"
   },
   "dependencies": {
+    "axios": "^0.26.0",
+    "winston": "^3.6.0",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
+    "@types/xml2js": "^0.4.9",
     "c8": "^7.11.0",
     "typescript": "^4.6.2",
     "vitest": "^0.6.1"
