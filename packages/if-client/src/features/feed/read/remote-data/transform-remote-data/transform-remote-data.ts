@@ -14,8 +14,7 @@ export const transformRemoteData = (
   return {
     lastBuildDate: parseDate(lastBuildDate),
     items: item
-      .map(({ guid: { _: guid }, category, pubDate, ...item }) => ({
-        guid,
+      .map(({ category, pubDate, ...item }) => ({
         pubDate: parseDate(pubDate),
         category: Array.isArray(category) ? category : [category],
         ...item,

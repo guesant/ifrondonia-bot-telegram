@@ -29,7 +29,8 @@ export const readFeed = (
 
     try {
       const parsedResponseData = await parseXML<IParsedRemoteData>(
-        response.data
+        response.data,
+        { ignoreAttrs: true }
       );
       return transformRemoteData(parsedResponseData);
     } catch (error) {

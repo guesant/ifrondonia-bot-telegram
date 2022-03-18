@@ -1,4 +1,10 @@
-import { parseStringPromise } from "xml2js";
+import { parseStringPromise, ParserOptions } from "xml2js";
 
-export const parseXML = <T = unknown>(xml: string): Promise<T> =>
-  parseStringPromise(xml, { explicitArray: false });
+export const parseXML = <T = unknown>(
+  xml: string,
+  options?: ParserOptions
+): Promise<T> =>
+  parseStringPromise(xml, {
+    explicitArray: false,
+    ...options,
+  });

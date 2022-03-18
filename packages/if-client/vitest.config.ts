@@ -7,7 +7,8 @@ export default defineConfig({
     coverage: {
       all: true,
       reporter: ["text"],
-      include: ["src"],
+      include: ["./src"],
+      exclude: ["./lib"],
     },
   },
 });
