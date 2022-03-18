@@ -9,6 +9,7 @@
     "test": "vitest --config ./vitest.config.ts run"
   },
   "dependencies": {
+    "winston": "^3.6.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
