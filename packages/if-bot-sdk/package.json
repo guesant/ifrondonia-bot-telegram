@@ -1,0 +1,19 @@
+{
+  "name": "@ifrondonia-bot-telegram/bot-sdk",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "rm -rf lib; npm run build",
+    "test": "vitest --config ./vitest.config.ts run"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.21",
+    "c8": "^7.11.0",
+    "typescript": "^4.6.2",
+    "vitest": "^0.6.1"
+  }
+}
