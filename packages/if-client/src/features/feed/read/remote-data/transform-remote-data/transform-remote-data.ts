@@ -1,6 +1,5 @@
 import { ITransformedRemoteData, IParsedRemoteData } from "./interfaces";
-
-const parseDate = (date: string) => new Date(date).getTime();
+import { transformRemoteDataDate } from "./transform-remote-data-date";
 
 export const transformRemoteData = (
   remoteData: IParsedRemoteData
@@ -12,10 +11,10 @@ export const transformRemoteData = (
   } = remoteData;
 
   return {
-    lastBuildDate: parseDate(lastBuildDate),
+    lastBuildDate: transformRemoteDataDate(lastBuildDate),
     items: item
       .map(({ category, pubDate, ...item }) => ({
-        pubDate: parseDate(pubDate),
+        pubDate: transformRemoteDataDate(pubDate),
         category: Array.isArray(category) ? category : [category],
         ...item,
       }))
