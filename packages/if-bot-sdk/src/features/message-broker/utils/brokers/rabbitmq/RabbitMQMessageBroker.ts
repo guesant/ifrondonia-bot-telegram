@@ -1,7 +1,7 @@
+import { tryParseJSON } from "@ifrondonia-bot-telegram/shared/lib/features/utils/try-parse-json";
 import { Channel, connect, Connection } from "amqplib";
 import { Logger } from "winston";
 import { IFRondoniaBotSDK } from "../../../../../IFRondoniaBotSDK";
-import { tryParseJSON } from "../../../../utils";
 import {
   IMessageBrokerListenOptions,
   IMessageBrokerSendOptions,
