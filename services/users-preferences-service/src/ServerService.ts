@@ -1,8 +1,9 @@
 import { Express } from "express";
 import { Server } from "http";
-import Container, { Service } from "typedi";
-import { setupServer } from "./services/http-server/setup-server";
+import { Service } from "typedi";
+import { ProjectContainer } from "./misc/di-container";
 import { HOST_TOKEN } from "./misc/di-tokens";
+import { setupServer } from "./services/http-server/setup-server";
 
 const PORT = process.env.API_PORT ?? "3001";
 const HOSTNAME = process.env.API_HOST ?? "0.0.0.0";
@@ -14,7 +15,7 @@ export class ServerService {
   httpServer: Server | null = null;
 
   get host() {
-    return Container.get(HOST_TOKEN);
+    return ProjectContainer.get(HOST_TOKEN);
   }
 
   constructor(

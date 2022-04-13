@@ -1,7 +1,7 @@
 import "reflect-metadata";
+import { ProjectContainer } from "./misc/di-container";
 import { UsersPreferencesService } from "./UsersPreferencesService";
-import { Container } from "typedi";
 
-const usersPreferencesService = Container.get(UsersPreferencesService);
+const usersPreferencesService = ProjectContainer.get(UsersPreferencesService);
 
 usersPreferencesService.start();

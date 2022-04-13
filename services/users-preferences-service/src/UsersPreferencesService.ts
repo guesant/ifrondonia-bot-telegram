@@ -1,8 +1,9 @@
 import { IFRondoniaBotSDK } from "@ifrondonia-bot-telegram/bot-sdk";
-import { Container, Service } from "typedi";
+import { Service } from "typedi";
 import { DatabaseService } from "./DatabaseService";
-import * as DI_TOKENS from "./misc/di-tokens";
 import { MessageBrokerService } from "./MessageBrokerService";
+import { ProjectContainer } from "./misc/di-container";
+import * as DI_TOKENS from "./misc/di-tokens";
 import { ServerService } from "./ServerService";
 
 @Service()
@@ -14,8 +15,8 @@ export class UsersPreferencesService {
     public serverService: ServerService,
     public messageBrokerService: MessageBrokerService
   ) {
-    Container.set(DI_TOKENS.HOST_TOKEN, this);
-    Container.set(DI_TOKENS.SDK_TOKEN, this.sdk);
+    ProjectContainer.set(DI_TOKENS.HOST_TOKEN, this);
+    ProjectContainer.set(DI_TOKENS.SDK_TOKEN, this.sdk);
   }
 
   async start() {

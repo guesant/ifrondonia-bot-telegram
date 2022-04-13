@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
-import Container, { Service } from "typedi";
+import { Service } from "typedi";
+import { ProjectContainer } from "./misc/di-container";
 import { SDK_TOKEN } from "./misc/di-tokens";
 
 @Service()
 export class DatabaseService {
   get sdk() {
-    return Container.get(SDK_TOKEN);
+    return ProjectContainer.get(SDK_TOKEN);
   }
 
   async start() {
