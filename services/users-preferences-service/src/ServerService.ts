@@ -30,11 +30,10 @@ export class ServerService {
       );
     });
 
-    const address = `${this.hostname}:${this.port}`;
+    const address = `http://${this.hostname}:${this.port}/`;
 
     this.host.sdk.logger.info({
-      message: `Running HTTP server on address ${address}.`,
-      args: { runningAt: address },
+      message: `Running the HTTP server on address ${address}.`,
     });
   }
 

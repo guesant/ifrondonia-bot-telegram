@@ -1,7 +1,7 @@
 {
   "name": "@ifrondonia-bot-telegram/users-preferences-service",
   "scripts": {
-    "dev": "node-dev src/main.ts"
+    "dev": "node-dev --clear --respawn src/main.ts"
   },
   "dependencies": {
     "@ifrondonia-bot-telegram/bot-sdk": "workspace:*",

@@ -30,12 +30,16 @@ export class UsersPreferencesService {
 
     await this.serverService.start();
 
-    this.sdk.logger.debug(
+    this.sdk.logger.info(
       "The Users Preferences Service was started sucessfully."
     );
+
+    process.once("SIGTERM", () => this.stop());
   }
 
   async stop() {
+    this.sdk.logger.info("Stopping the Users Preferences Service...");
+
     await this.serverService.stop();
 
     await this.messageBrokerService.stop();
@@ -43,5 +47,9 @@ export class UsersPreferencesService {
     await this.databaseService.stop();
 
     await this.sdk.stop();
+
+    this.sdk.logger.info(
+      "The Users Preferences Service was stopped sucessfully."
+    );
   }
 }
