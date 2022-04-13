@@ -1,0 +1,38 @@
+services:
+  node:
+    image: node-pnpm
+    container_name: users-preferences-service-app
+    command: tail -f /dev/null
+    working_dir: /code/services/users-preferences-service
+    ports:
+      - 3001:3001
+    volumes:
+      - ../..:/code
+    env_file:
+      - ../../.env
+      - ./.env
+    networks:
+      - users-preferences-service-net
+      - ifrondonia-bot-net
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    container_name: users-preferences-service-db
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    networks:
+      - users-preferences-service-net
+    volumes:
+      - ./volumes/mongodb:/data/db
+
+networks:
+  users-preferences-service-net:
+    name: users-preferences-service-net
+  ifrondonia-bot-net:
+    external: true

@@ -17,4 +17,10 @@ export class IFRondoniaBotSDK {
 
     this.logger.debug("The BotSDK was started sucessfully.");
   }
+
+  async stop() {
+    await this.msClients.stop();
+
+    await this.messageBrokerService.stop();
+  }
 }
