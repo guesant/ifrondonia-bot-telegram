@@ -1,9 +1,16 @@
+import { UsersPreferencesServiceClient } from "./users-preferences/UsersPreferencesServiceClient";
 import { IFRondoniaBotSDK } from "../../IFRondoniaBotSDK";
 
 export class MSClientsService {
   constructor(readonly host: IFRondoniaBotSDK) {}
 
-  async setup() {}
+  usersPreferences = new UsersPreferencesServiceClient();
 
-  async stop() {}
+  async setup() {
+    await this.usersPreferences.setup();
+  }
+
+  async stop() {
+    await this.usersPreferences.stop();
+  }
 }

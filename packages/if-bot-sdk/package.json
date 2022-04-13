@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "amqplib": "^0.8.0",
+    "axios": "^0.26.1",
     "winston": "^3.6.0",
     "@ifrondonia-bot-telegram/shared": "workspace:*"
   },
