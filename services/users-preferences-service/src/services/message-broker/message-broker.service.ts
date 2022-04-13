@@ -1,5 +1,5 @@
 import { Service } from "typedi";
-import { setupMessageBroker } from "./services/message-broker";
+import { setupMessageBroker } from "./setup-message-broker";
 
 @Service()
 export class MessageBrokerService {

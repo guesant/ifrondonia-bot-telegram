@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Service } from "typedi";
-import { ProjectContainer } from "./misc/di-container";
-import { SDK_TOKEN } from "./misc/di-tokens";
+import { ProjectContainer } from "../../misc/di-container";
+import { SDK_TOKEN } from "../../misc/di-tokens";
 
 @Service()
 export class DatabaseService {
@@ -12,11 +12,10 @@ export class DatabaseService {
   async start() {
     try {
       this.sdk.logger.debug("Starting a new database connection...");
-
       await mongoose.connect(process.env.MONGODB_URI!);
     } catch (error) {
       this.sdk.logger.error({
-        message: "Can not connect to the database.",
+        message: "Can't connect to the database.",
         error,
       });
     }

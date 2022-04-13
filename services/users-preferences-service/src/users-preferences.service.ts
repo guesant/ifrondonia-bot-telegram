@@ -1,10 +1,10 @@
 import { IFRondoniaBotSDK } from "@ifrondonia-bot-telegram/bot-sdk";
 import { Service } from "typedi";
-import { DatabaseService } from "./DatabaseService";
-import { MessageBrokerService } from "./MessageBrokerService";
+import { DatabaseService } from "./services/database/database.service";
+import { MessageBrokerService } from "./services/message-broker/message-broker.service";
 import { ProjectContainer } from "./misc/di-container";
 import * as DI_TOKENS from "./misc/di-tokens";
-import { ServerService } from "./ServerService";
+import { HTTPServerService } from "./services/http-server/http-server.service";
 
 @Service()
 export class UsersPreferencesService {
@@ -12,7 +12,7 @@ export class UsersPreferencesService {
 
   constructor(
     public databaseService: DatabaseService,
-    public serverService: ServerService,
+    public httpServerService: HTTPServerService,
     public messageBrokerService: MessageBrokerService
   ) {
     ProjectContainer.set(DI_TOKENS.HOST_TOKEN, this);
@@ -28,7 +28,7 @@ export class UsersPreferencesService {
 
     await this.messageBrokerService.start();
 
-    await this.serverService.start();
+    await this.httpServerService.start();
 
     this.sdk.logger.info(
       "The Users Preferences Service was started sucessfully."
@@ -40,7 +40,7 @@ export class UsersPreferencesService {
   async stop() {
     this.sdk.logger.info("Stopping the Users Preferences Service...");
 
-    await this.serverService.stop();
+    await this.httpServerService.stop();
 
     await this.messageBrokerService.stop();
 

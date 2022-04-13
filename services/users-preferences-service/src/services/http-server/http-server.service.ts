@@ -1,15 +1,15 @@
 import { Express } from "express";
 import { Server } from "http";
 import { Service } from "typedi";
-import { ProjectContainer } from "./misc/di-container";
-import { HOST_TOKEN } from "./misc/di-tokens";
-import { setupServer } from "./services/http-server/setup-server";
+import { ProjectContainer } from "../../misc/di-container";
+import { HOST_TOKEN } from "../../misc/di-tokens";
+import { setupServer } from "./setup-server";
 
 const PORT = process.env.API_PORT ?? "3001";
 const HOSTNAME = process.env.API_HOST ?? "0.0.0.0";
 
 @Service()
-export class ServerService {
+export class HTTPServerService {
   server: Express = setupServer();
 
   httpServer: Server | null = null;
