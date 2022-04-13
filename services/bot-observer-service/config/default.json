@@ -1,0 +1,13 @@
+{
+  "url": "https://...",
+  "cronInterval": "0 19 * * *",
+  "feeds": [
+    {
+      "id": "...",
+      "path": {
+        "subdomain": "blog",
+        "resource": ".../..."
+      }
+    }
+  ]
+}

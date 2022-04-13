@@ -8,6 +8,8 @@ import { HTTPServerService } from "./services/http-server/http-server.service";
 
 @Service()
 export class UsersPreferencesService {
+  static NAME = "Users Preferences Service";
+
   sdk = new IFRondoniaBotSDK();
 
   constructor(
@@ -20,7 +22,7 @@ export class UsersPreferencesService {
   }
 
   async start() {
-    this.sdk.logger.debug("Starting the Users Preferences Service...");
+    this.sdk.logger.debug(`Starting the ${UsersPreferencesService.NAME}...`);
 
     await this.sdk.setup();
 
@@ -31,14 +33,14 @@ export class UsersPreferencesService {
     await this.httpServerService.start();
 
     this.sdk.logger.info(
-      "The Users Preferences Service was started sucessfully."
+      `The ${UsersPreferencesService.NAME} was started sucessfully.`
     );
 
     process.once("SIGTERM", () => this.stop());
   }
 
   async stop() {
-    this.sdk.logger.info("Stopping the Users Preferences Service...");
+    this.sdk.logger.info(`Stopping the ${UsersPreferencesService.NAME}...`);
 
     await this.httpServerService.stop();
 
@@ -49,7 +51,7 @@ export class UsersPreferencesService {
     await this.sdk.stop();
 
     this.sdk.logger.info(
-      "The Users Preferences Service was stopped sucessfully."
+      `The ${UsersPreferencesService.NAME} was stopped sucessfully.`
     );
   }
 }

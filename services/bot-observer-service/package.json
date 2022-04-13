@@ -1,0 +1,20 @@
+{
+  "name": "@ifrondonia-bot-telegram/bot-observer-service",
+  "scripts": {
+    "dev": "node-dev --clear --respawn src/main.ts"
+  },
+  "dependencies": {
+    "@ifrondonia-bot-telegram/bot-sdk": "workspace:*",
+    "@ifrondonia-bot-telegram/if-client": "workspace:*",
+    "config": "^3.3.7",
+    "reflect-metadata": "^0.1.13",
+    "typedi": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/config": "^0.0.41",
+    "@types/node": "^17.0.21",
+    "node-dev": "^7.2.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2"
+  }
+}

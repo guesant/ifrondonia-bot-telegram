@@ -33,7 +33,7 @@ export class RabbitMQMessageBroker implements IMessageBrokerService {
       this.conn = await connect(RABBITMQ_URI);
     } catch (error) {
       this.logger.error({
-        message: `Can't connect to the ${RABBITMQ_URI}.`,
+        message: `Can't connect to the RabbitMQ instance.`,
       });
       throw error;
     }
@@ -124,7 +124,9 @@ export class RabbitMQMessageBroker implements IMessageBrokerService {
     });
 
     return async () => {
-      await this.channel.cancel(consumerTag);
+      try {
+        await this.channel.cancel(consumerTag);
+      } catch (error) {}
 
       this.logger.debug({
         message: `No longer listening on queue ${queue}.`,
