@@ -15,6 +15,8 @@ export const setupServer = (): Express => {
 
   const server = createExpressServer({
     controllers: controllers,
+    classTransformer: true,
+    validation: true,
   });
 
   return server;

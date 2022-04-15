@@ -26,11 +26,24 @@ export class UsersPreferencesServiceClient {
 
   async stop() {}
 
+  async list(query?: { feed?: string | string[] }) {
+    const { data } = await this.http({
+      url: "/users",
+      params: { ...query },
+    });
+
+    return data as any[];
+  }
+
   async listAllSubscribedFeeds() {
     const { data } = await this.http({
       url: "/feeds/all-subscribed",
     });
 
     return data as string[];
+  }
+
+  async sync(data: any) {
+    await this.http({ url: "/users/sync", method: "post", data });
   }
 }

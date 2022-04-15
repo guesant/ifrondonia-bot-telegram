@@ -36,6 +36,7 @@ export class UsersPreferencesService {
       `The ${UsersPreferencesService.NAME} was started sucessfully.`
     );
 
+    process.once("SIGINT", () => this.stop());
     process.once("SIGTERM", () => this.stop());
   }
 
