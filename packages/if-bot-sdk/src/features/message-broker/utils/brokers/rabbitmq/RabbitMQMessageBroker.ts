@@ -25,9 +25,7 @@ export class RabbitMQMessageBroker implements IMessageBrokerService {
       process.exit(1);
     }
 
-    this.logger.debug({
-      message: `Starting an amqp connection to ${RABBITMQ_URI}...`,
-    });
+    this.logger.debug(`Starting an amqp connection to ${RABBITMQ_URI}...`);
 
     try {
       this.conn = await connect(RABBITMQ_URI);

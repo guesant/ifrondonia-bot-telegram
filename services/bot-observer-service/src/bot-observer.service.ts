@@ -15,12 +15,18 @@ export class BotObserverService {
     ProjectContainer.set(DI_TOKENS.SDK_TOKEN, this.sdk);
   }
 
+  private get subServices() {
+    return [this.configService];
+  }
+
   async start() {
-    this.sdk.logger.debug(`Starting the ${BotObserverService.NAME}...`);
+    this.sdk.logger.info(`Starting the ${BotObserverService.NAME}...`);
 
     await this.sdk.setup();
 
-    await this.configService.start();
+    for (const service of this.subServices) {
+      await service.start?.();
+    }
 
     this.sdk.logger.info(
       `The ${BotObserverService.NAME} was started sucessfully.`
@@ -32,7 +38,9 @@ export class BotObserverService {
   async stop() {
     this.sdk.logger.info(`Stopping the ${BotObserverService.NAME}...`);
 
-    await this.configService.stop();
+    for (const service of this.subServices.reverse()) {
+      await service.stop?.();
+    }
 
     await this.sdk.stop();
 

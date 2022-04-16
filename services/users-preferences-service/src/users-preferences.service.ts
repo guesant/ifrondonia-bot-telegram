@@ -21,16 +21,22 @@ export class UsersPreferencesService {
     ProjectContainer.set(DI_TOKENS.SDK_TOKEN, this.sdk);
   }
 
+  private get subServices() {
+    return [
+      this.databaseService,
+      this.messageBrokerService,
+      this.httpServerService,
+    ];
+  }
+
   async start() {
-    this.sdk.logger.debug(`Starting the ${UsersPreferencesService.NAME}...`);
+    this.sdk.logger.info(`Starting the ${UsersPreferencesService.NAME}...`);
 
     await this.sdk.setup();
 
-    await this.databaseService.start();
-
-    await this.messageBrokerService.start();
-
-    await this.httpServerService.start();
+    for (const service of this.subServices) {
+      await service.start?.();
+    }
 
     this.sdk.logger.info(
       `The ${UsersPreferencesService.NAME} was started sucessfully.`
@@ -43,11 +49,9 @@ export class UsersPreferencesService {
   async stop() {
     this.sdk.logger.info(`Stopping the ${UsersPreferencesService.NAME}...`);
 
-    await this.httpServerService.stop();
-
-    await this.messageBrokerService.stop();
-
-    await this.databaseService.stop();
+    for (const service of this.subServices.reverse()) {
+      await service.stop?.();
+    }
 
     await this.sdk.stop();
 

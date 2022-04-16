@@ -9,7 +9,7 @@ export const readFeed = (
 ) => {
   return async (
     resource: string,
-    subdomain?: string,
+    subdomain?: string | null | undefined,
     baseURL: string | null = client.baseURL
   ) => {
     if (!baseURL) {

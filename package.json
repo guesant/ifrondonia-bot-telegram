@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "test": "pnpm -r run --if-present test"
+    "test": "pnpm -r run --if-present test",
+    "build:packages": "pnpm -r run --if-present prepare"
   }
 }

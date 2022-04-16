@@ -1,0 +1,17 @@
+services:
+  node:
+    image: node-pnpm
+    container_name: bot-feed-observer-service-app
+    command: tail -f /dev/null
+    working_dir: /code/services/bot-feed-observer-service
+    volumes:
+      - ../..:/code
+    env_file:
+      - ../../.env
+      - ./.env
+    networks:
+      - ifrondonia-bot-net
+
+networks:
+  ifrondonia-bot-net:
+    external: true

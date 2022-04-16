@@ -23,6 +23,10 @@ export class BotService {
     ProjectContainer.set(SDK_TOKEN, this.sdk);
   }
 
+  private get subServices() {
+    return [this.messageBrokerService];
+  }
+
   async start(botToken: string) {
     if (!botToken) {
       throw new TypeError("Invalid bot token.");
@@ -32,7 +36,9 @@ export class BotService {
 
     await this.sdk.setup();
 
-    await this.messageBrokerService.start();
+    for (const service of this.subServices) {
+      await service.start?.();
+    }
 
     this.bot.launch();
 
@@ -43,7 +49,9 @@ export class BotService {
   async stop(reason?: string) {
     this.bot.stop(reason);
 
-    await this.messageBrokerService.stop();
+    for (const service of this.subServices.reverse()) {
+      await service.stop?.();
+    }
 
     await this.sdk.stop();
   }
