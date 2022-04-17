@@ -1,0 +1,12 @@
+.env
+
+.pnpm-store
+node_modules
+
+*/*/lib
+*/*/volumes
+*/*/coverage
+
+Dockerfile
+.dockerignore
+.git

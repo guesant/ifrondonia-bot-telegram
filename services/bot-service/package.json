@@ -1,5 +1,11 @@
 {
   "name": "@ifrondonia-bot-telegram/bot-service",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "node-dev --clear --respawn src/main.ts",
+    "build": "rm -rf lib; tsc",
+    "start": "node lib/main.js"
+  },
   "dependencies": {
     "@ifrondonia-bot-telegram/bot-sdk": "workspace:*",
     "@ifrondonia-bot-telegram/if-client": "workspace:*",
@@ -8,6 +14,8 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
+    "node-dev": "^7.2.0",
+    "ts-node": "^10.7.0",
     "typescript": "^4.6.2"
   }
 }

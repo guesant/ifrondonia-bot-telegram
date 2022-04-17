@@ -4,8 +4,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "prepare": "rm -rf lib; npm run build",
+    "build": "rm -rf lib; tsc",
     "test": "vitest --config ./vitest.config.ts run"
   },
   "dependencies": {

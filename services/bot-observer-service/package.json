@@ -1,7 +1,9 @@
 {
   "name": "@ifrondonia-bot-telegram/bot-observer-service",
   "scripts": {
-    "dev": "node-dev --clear --respawn src/main.ts"
+    "dev": "node-dev --clear --respawn src/main.ts",
+    "build": "rm -rf lib; tsc",
+    "start": "node lib/main.js"
   },
   "dependencies": {
     "@ifrondonia-bot-telegram/bot-sdk": "workspace:*",

@@ -3,6 +3,6 @@
   "private": true,
   "scripts": {
     "test": "pnpm -r run --if-present test",
-    "build:packages": "pnpm -r run --if-present prepare"
+    "build": "pnpm -r run --if-present build"
   }
 }
