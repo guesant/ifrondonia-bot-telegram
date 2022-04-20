@@ -1,4 +1,5 @@
 import { Queue } from "@ifrondonia-bot-telegram/bot-sdk/lib/features/message-broker";
+import { CleanupFunctions } from "@ifrondonia-bot-telegram/shared/lib/features/utils/cleanup-functions";
 import { Service } from "typedi";
 import { ProjectContainer } from "../../misc/di-container";
 import { SDK_TOKEN } from "../../misc/di-tokens";
@@ -15,14 +16,7 @@ export class ConfigService {
     return ProjectContainer.get(SDK_TOKEN);
   }
 
-  #cleanupFunctions = new Set<() => void>();
-
-  private async runCleanupFunctions() {
-    for (const fn of this.#cleanupFunctions) {
-      await Promise.resolve(fn());
-      this.#cleanupFunctions.delete(fn);
-    }
-  }
+  private cleanupService = new CleanupFunctions();
 
   async start() {
     await this.setupListeners();
@@ -30,11 +24,11 @@ export class ConfigService {
   }
 
   async stop() {
-    await this.runCleanupFunctions();
+    await this.cleanupService.run();
   }
 
   private async setupListeners() {
-    await this.runCleanupFunctions();
+    await this.cleanupService.run();
 
     const cleanupFunctions = await Promise.all(
       eventsToListenAndBroadcastConfig.map((queue) =>
@@ -45,6 +39,6 @@ export class ConfigService {
       )
     );
 
-    cleanupFunctions.forEach((fn) => this.#cleanupFunctions.add(fn));
+    cleanupFunctions.forEach((fn) => this.cleanupService.add(fn));
   }
 }

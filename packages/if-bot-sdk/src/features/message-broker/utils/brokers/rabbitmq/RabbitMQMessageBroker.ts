@@ -15,7 +15,9 @@ export class RabbitMQMessageBroker implements IMessageBrokerService {
 
   logger: Logger;
 
-  constructor(readonly host: IFRondoniaBotSDK) {
+  #isStopping = false;
+
+  constructor(host: IFRondoniaBotSDK) {
     this.logger = host.logger.child({});
   }
 
@@ -25,7 +27,9 @@ export class RabbitMQMessageBroker implements IMessageBrokerService {
       process.exit(1);
     }
 
-    this.logger.debug(`Starting an amqp connection to ${RABBITMQ_URI}...`);
+    this.logger.debug(
+      `Starting an amqp connection to the RabbitMQ instance...`
+    );
 
     try {
       this.conn = await connect(RABBITMQ_URI);
@@ -52,24 +56,22 @@ export class RabbitMQMessageBroker implements IMessageBrokerService {
     this.logger.debug({
       message: `Channel created sucessfully. Message Broker Service started.`,
     });
-
-    process.once("SIGINT", () => this.stop());
-    process.once("SIGTERM", () => this.stop());
   }
-
-  #isStopping = false;
 
   async stop() {
     if (this.#isStopping) {
-      this.logger.debug("The Message Broker Service is already stopping.");
       return;
     }
 
     this.logger.debug("Stopping the Message Broker Service.");
 
     this.#isStopping = true;
+
     await this.channel.close();
+
     await this.conn.close();
+
+    this.#isStopping = false;
   }
 
   async send(options: IMessageBrokerSendOptions) {
