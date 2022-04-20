@@ -23,6 +23,7 @@ COPY --from=builder /tmp-code-raw/services /code/services
 COPY --from=builder /tmp-code-raw/packages /code/packages
 COPY --from=builder /tmp-code-raw/node_modules /code/node_modules
 USER node
+ENV NODE_ENV=production
 CMD [ "npm", "run", "start" ]
 
 FROM base-node-service as bot-feed-observer-service

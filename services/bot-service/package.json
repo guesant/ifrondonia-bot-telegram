@@ -9,6 +9,7 @@
   "dependencies": {
     "@ifrondonia-bot-telegram/bot-sdk": "workspace:*",
     "@ifrondonia-bot-telegram/if-client": "workspace:*",
+    "@ifrondonia-bot-telegram/shared": "workspace:*",
     "telegraf": "^4.7.0",
     "typedi": "^0.10.0"
   },

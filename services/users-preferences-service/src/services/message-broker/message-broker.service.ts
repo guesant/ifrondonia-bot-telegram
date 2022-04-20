@@ -1,11 +1,37 @@
+import { IAbstractService } from "@ifrondonia-bot-telegram/shared/lib/interfaces/IAbstractService";
 import { Service } from "typedi";
-import { setupMessageBroker } from "./setup-message-broker";
-
+import { SeederOnStartSendPreferences } from "./seeder-on-start-send-preferences";
 @Service()
 export class MessageBrokerService {
-  async start() {
-    await setupMessageBroker();
+  constructor(
+    readonly seederOnStartSendPreferences: SeederOnStartSendPreferences
+  ) {}
+
+  private get seeders(): IAbstractService[] {
+    return [this.seederOnStartSendPreferences];
   }
 
-  async stop() {}
+  private get listeners(): IAbstractService[] {
+    return [];
+  }
+
+  async start() {
+    for (const listenerService of this.listeners) {
+      await listenerService.start?.();
+    }
+
+    for (const seederService of this.seeders) {
+      await seederService.start?.();
+    }
+  }
+
+  async stop() {
+    for (const seederService of this.seeders.reverse()) {
+      await seederService.stop?.();
+    }
+
+    for (const listenerService of this.listeners.reverse()) {
+      await listenerService.stop?.();
+    }
+  }
 }
