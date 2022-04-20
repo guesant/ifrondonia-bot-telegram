@@ -1,2 +1,2 @@
-export * from "./read";
+export * from "./read-feed";
 export * as utils from "./utils";
